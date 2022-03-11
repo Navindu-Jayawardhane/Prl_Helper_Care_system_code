@@ -23,20 +23,20 @@ const String importn_you_f2 = "In case of an accident, pay attention to him imme
 
 int Threshold = 120;
 
-//const int finger01 = 18;
+const int finger01 = 18;
 const int finger02 = 5;
 int state_f2; // 0 close - 1 open switch
 int state_f1;
 
 #define FIREBASE_HOST "https://prl-helper-system-default-rtdb.firebaseio.com/"
 #define FIREBASE_AUTH "urQKbEa3y37zA8s1ZjSuG5moNBZb3B9DhXtsT6cH"
-#define WIFI_SSID "HUAWEI Y9 2018"
-#define WIFI_PASSWORD "20bc8a3b28a2"
+#define WIFI_SSID "Dialog 4G 715"
+#define WIFI_PASSWORD "4F2c67D3"
 
 void setup() {
   Serial.begin(115200);
   pinMode(alerm, OUTPUT);
-  //  pinMode(finger01, INPUT_PULLUP);
+  pinMode(finger01, INPUT_PULLUP);
   pinMode(finger02, INPUT_PULLUP);
   Serial.println("Initializing...");
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -68,7 +68,7 @@ void setup() {
 void loop() {
 
   long irValue = particleSensor.getIR();
-  //  state_f1 = digitalRead(finger01);
+  state_f1 = digitalRead(finger01);
   state_f2 = digitalRead(finger02);
   //  Serial.println(state_f2);
   if (checkForBeat(irValue) == true) {
@@ -118,17 +118,26 @@ void loop() {
   }
 
   else if (state_f2 == LOW) {
-    //    tone(buzzer, 400);
-    Serial.println("I am true! man");
+    Serial.println("I am true2! man");
     Firebase.set("/sensor/Finger_inputs", importn_you);
     digitalWrite(alerm, HIGH);
     delay(5000);
     digitalWrite(alerm, LOW);
     Firebase.set("/sensor/Finger_inputs", good_hel);
   }
-//  else{
-//    Firebase.set("/sensor/Finger_inputs", good_hel);
-//  }
+
+  else if (state_f1 == HIGH) {
+    Serial.println("I am true! man");
+    Firebase.set("/sensor/Finger_inputs", importn_you); // what is his want
+    digitalWrite(alerm, HIGH);
+    delay(5000);
+    digitalWrite(alerm, LOW);
+    Firebase.set("/sensor/Finger_inputs", good_hel);
+  }
+
+  //  else{
+  //    Firebase.set("/sensor/Finger_inputs", good_hel);
+  //  }
   //  }else if (state_f1 == HIGH) {
   //    //    noTone(buzzer);
   //    digitalWrite(alerm, HIGH);
