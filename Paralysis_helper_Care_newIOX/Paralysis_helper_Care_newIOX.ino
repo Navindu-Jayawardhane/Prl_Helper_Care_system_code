@@ -30,8 +30,10 @@ int state_f1;
 
 #define FIREBASE_HOST "https://prl-helper-system-default-rtdb.firebaseio.com/"
 #define FIREBASE_AUTH "urQKbEa3y37zA8s1ZjSuG5moNBZb3B9DhXtsT6cH"
-#define WIFI_SSID "Dialog 4G 715"
-#define WIFI_PASSWORD "4F2c67D3"
+//#define WIFI_SSID "Dialog 4G 715"
+//#define WIFI_PASSWORD "4F2c67D3"
+#define WIFI_SSID "HUAWEI Y9 2018"
+#define WIFI_PASSWORD "20bc8a3b28a2"
 
 void setup() {
   Serial.begin(115200);
@@ -119,11 +121,11 @@ void loop() {
 
   else if (state_f2 == LOW) {
     Serial.println("I am true2! man");
-    Firebase.set("/sensor/Finger_inputs", importn_you);
+    Firebase.set("/sensor/Finger_inputs_02", importn_you);
     digitalWrite(alerm, HIGH);
     delay(5000);
     digitalWrite(alerm, LOW);
-    Firebase.set("/sensor/Finger_inputs", good_hel);
+    Firebase.set("/sensor/Finger_inputs_02", good_hel);
   }
 
   else if (state_f1 == HIGH) {
@@ -145,7 +147,8 @@ void loop() {
   //    Firebase.set("/sensor/Finger_inputs", importn_you); // what is his want
   //
   //
-  //  }else if (state_f2 == HIGH) {
+  //  }
+//  else if (state_f2 == HIGH) {
   //    //    tone(buzzer, 400);
   //    digitalWrite(alerm, LOW);
   //    Serial.println("I am False2! man");
